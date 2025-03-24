@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <Button
+        android:id="@+id/btnLogin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Login" />
+
+    <Button
+        android:id="@+id/btnProfile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Profile" />
+
+    <Button
+        android:id="@+id/btnTrainingPlan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Training Plan" />
+
+    <Button
+        android:id="@+id/btnStatistics"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Statistics" />
+
+</LinearLayout>
+
+    <!-- activity_login.xml -->
+    <?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:orientation="vertical"
+android:padding="16dp">
+
+<EditText
+    android:id="@+id/etEmail"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:hint="Email" />
+
+<EditText
+    android:id="@+id/etPassword"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:hint="Password"
+    android:inputType="textPassword" />
+
+<Button
+    android:id="@+id/btnLoginSubmit"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="Login" />
+</LinearLayout>
+
+    <!-- activity_profile.xml -->
+    <?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:orientation="vertical"
+android:padding="16dp">
+
+<EditText
+    android:id="@+id/etClub"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:hint="Club Name" />
+
+<EditText
+    android:id="@+id/etHeight"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:hint="Height (cm)" />
+
+<EditText
+    android:id="@+id/etWeight"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:hint="Weight (kg)" />
+
+<Button
+    android:id="@+id/btnSaveProfile"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="Save Profile" />
+</LinearLayout>
+
+    <!-- activity_training_plan.xml -->
+    <?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:orientation="vertical"
+android:padding="16dp">
+
+<TextView
+    android:id="@+id/tvTrainingPlan"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="Training Plan" />
+
+<Button
+    android:id="@+id/btnGetLocation"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="Find Training Spot" />
+</LinearLayout>
+
+    <!-- activity_statistics.xml -->
+    <?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:orientation="vertical"
+android:padding="16dp">
+
+<TextView
+    android:id="@+id/tvStatistics"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="Training Statistics" />
+
+<Button
+    android:id="@+id/btnViewStats"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="View Stats" />
+</LinearLayout>
