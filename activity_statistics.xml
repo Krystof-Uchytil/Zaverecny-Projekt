@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tv_stats"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Statistiky"
+            android:textSize="18sp"/>
+
+        <EditText
+            android:id="@+id/et_update_weight"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Aktualizovaná váha (kg)"
+            android:inputType="number"/>
+
+        <EditText
+            android:id="@+id/et_distance"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Uběhnuté kilometry"
+            android:inputType="numberDecimal"/>
+
+        <EditText
+            android:id="@+id/et_calories"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Spálené kalorie"
+            android:inputType="number"/>
+
+        <Button
+            android:id="@+id/btn_update_stats"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Aktualizovat statistiky"
+            android:layout_marginTop="16dp"/>
+
+    </LinearLayout>
+</ScrollView>

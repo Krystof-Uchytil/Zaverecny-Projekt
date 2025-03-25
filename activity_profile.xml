@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/et_club"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Klub"/>
+
+        <EditText
+            android:id="@+id/et_height"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Výška (cm)"
+            android:inputType="number"/>
+
+        <EditText
+            android:id="@+id/et_weight"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Váha (kg)"
+            android:inputType="number"/>
+
+        <EditText
+            android:id="@+id/et_position"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Pozice na hřišti"/>
+
+        <EditText
+            android:id="@+id/et_training_frequency"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Frekvence tréninku (např. 3x týdně)"/>
+
+        <EditText
+            android:id="@+id/et_goal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Cíl tréninku"/>
+
+        <Button
+            android:id="@+id/btn_save_profile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Uložit profil"
+            android:layout_marginTop="16dp"/>
+
+    </LinearLayout>
+</ScrollView>
