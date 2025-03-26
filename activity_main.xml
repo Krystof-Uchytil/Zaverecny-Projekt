@@ -1,37 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:gravity="center"
     android:padding="16dp">
 
     <Button
         android:id="@+id/btn_profile"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Profil" />
+        android:layout_gravity="center"
+        android:padding="16dp"
+        android:text="@string/profil"/>
 
     <Button
         android:id="@+id/btn_training_plan"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Tréninkový plán"
+        android:layout_gravity="center"
+        android:padding="16dp"
+        android:text="@string/plan"
         android:layout_marginTop="16dp"/>
 
     <Button
         android:id="@+id/btn_statistics"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Statistiky"
+        android:layout_gravity="center"
+        android:padding="16dp"
+        android:text="@string/stats"
         android:layout_marginTop="16dp"/>
 
     <Button
         android:id="@+id/btn_logout"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Odhlásit se"
+        android:layout_gravity="center"
+        android:padding="16dp"
+        android:text="@string/logout"
         android:layout_marginTop="16dp"/>
-
 </LinearLayout>

@@ -2,48 +2,72 @@
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:padding="16dp">
 
     <LinearLayout
-        android:orientation="vertical"
-        android:padding="16dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center">
 
         <TextView
             android:id="@+id/tv_stats"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Statistiky"
-            android:textSize="18sp"/>
+            android:text="@string/stats_title"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:gravity="center"
+            android:padding="8dp"/>
 
         <EditText
-            android:id="@+id/et_update_weight"
-            android:layout_width="match_parent"
+            android:id="@+id/et_weight"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="Aktualizovaná váha (kg)"
-            android:inputType="number"/>
+            android:hint="@string/stats_weight"
+            android:inputType="number"
+            android:minHeight="48dp"
+            android:autofillHints="weight"
+            android:textColor="@color/black"
+            android:textColorHint="@color/white"
+            android:background="?android:attr/editTextBackground"/>
 
         <EditText
             android:id="@+id/et_distance"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="Uběhnuté kilometry"
-            android:inputType="numberDecimal"/>
+            android:hint="@string/stats_distance"
+            android:inputType="numberDecimal"
+            android:minHeight="48dp"
+            android:autofillHints="distance"
+            android:textColor="@color/black"
+            android:textColorHint="@color/white"
+            android:background="?android:attr/editTextBackground"
+            android:layout_marginTop="8dp"/>
 
         <EditText
             android:id="@+id/et_calories"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="Spálené kalorie"
-            android:inputType="number"/>
+            android:hint="@string/stats_calories"
+            android:inputType="number"
+            android:minHeight="48dp"
+            android:autofillHints="caloriesBurned"
+            android:textColor="@color/black"
+            android:textColorHint="@color/white"
+            android:background="?android:attr/editTextBackground"
+            android:layout_marginTop="8dp"/>
 
         <Button
-            android:id="@+id/btn_update_stats"
-            android:layout_width="match_parent"
+            android:id="@+id/btn_save_stats"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Aktualizovat statistiky"
-            android:layout_marginTop="16dp"/>
+            android:text="@string/stats_save"
+            android:padding="12dp"
+            android:layout_marginTop="16dp"
+            android:layout_gravity="center"/>
 
     </LinearLayout>
 </ScrollView>

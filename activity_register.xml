@@ -16,15 +16,23 @@
         android:autofillHints="emailAddress"
         android:inputType="textEmailAddress" />
 
+    <EditText
+        android:id="@+id/et_password"
+        android:layout_width="395dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:minHeight="48dp"
+        android:hint="@string/heslo"
+        android:autofillHints="password"
+        android:inputType="textPassword" />
+
     <Button
-        android:id="@+id/btn_login"
+        android:id="@+id/btn_register"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/login"
         android:layout_gravity="center"
+        android:text="@string/register"
         android:padding="16dp"
-        android:layout_marginTop="16dp"/>
-
+        android:layout_marginTop="8dp"/>
 
 </LinearLayout>
-

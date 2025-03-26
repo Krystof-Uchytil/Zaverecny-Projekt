@@ -12,47 +12,64 @@
 
         <EditText
             android:id="@+id/et_club"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="Klub"/>
+            android:hint="@string/club"
+            android:minHeight="48dp"
+            android:autofillHints="club"
+            android:inputType="text"
+            android:textColor="@color/black"
+            android:textColorHint="@color/white"/>
 
         <EditText
             android:id="@+id/et_height"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="Výška (cm)"
-            android:inputType="number"/>
+            android:hint="@string/height"
+            android:inputType="number"
+            android:minHeight="48dp"
+            android:autofillHints="height (cm)"
+            android:textColor="@color/black"
+            android:textColorHint="@color/white"/>
 
         <EditText
             android:id="@+id/et_weight"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="Váha (kg)"
-            android:inputType="number"/>
+            android:hint="@string/weight"
+            android:inputType="number"
+            android:minHeight="48dp"
+            android:autofillHints="weight (kg)"
+            android:textColor="@color/black"
+            android:textColorHint="@color/white"/>
 
         <EditText
-            android:id="@+id/et_position"
-            android:layout_width="match_parent"
+            android:id="@+id/et_pref"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="Pozice na hřišti"/>
+            android:hint="@string/pref"
+            android:minHeight="48dp"
+            android:autofillHints="pref"
+            android:inputType="text"
+            android:textColor="@color/black"
+            android:textColorHint="@color/white"/>
 
         <EditText
-            android:id="@+id/et_training_frequency"
-            android:layout_width="match_parent"
+            android:id="@+id/et_level"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="Frekvence tréninku (např. 3x týdně)"/>
-
-        <EditText
-            android:id="@+id/et_goal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Cíl tréninku"/>
+            android:hint="@string/level"
+            android:minHeight="48dp"
+            android:autofillHints="level"
+            android:inputType="text"
+            android:textColor="@color/black"
+            android:textColorHint="@color/white"/>
 
         <Button
             android:id="@+id/btn_save_profile"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Uložit profil"
+            android:text="@string/save"
             android:layout_marginTop="16dp"/>
 
     </LinearLayout>

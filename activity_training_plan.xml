@@ -2,28 +2,42 @@
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:padding="16dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="16dp">
+        android:gravity="center">
 
         <TextView
             android:id="@+id/tv_training_plan"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Plán tréninku"
-            android:textSize="18sp"/>
+            android:text="@string/training_plan"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:gravity="center"
+            android:padding="8dp"/>
 
         <TextView
             android:id="@+id/tv_location"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Získávám polohu..."
-            android:layout_marginTop="16dp"
-            android:textSize="16sp"/>
+            android:text="@string/location_unavailable"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            android:padding="8dp"/>
 
+        <Button
+            android:id="@+id/btn_update_location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/update_location"
+            android:padding="12dp"
+            android:layout_marginTop="16dp"
+            android:layout_gravity="center"/>
     </LinearLayout>
 </ScrollView>
