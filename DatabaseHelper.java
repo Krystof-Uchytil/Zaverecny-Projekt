@@ -1,11 +1,14 @@
 package com.example.projekt_rugbytrainings;
 
+import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
-    private static final String DATABASE_NAME = "rugbytrainings.db";
+
+    private static final String DATABASE_NAME = "rugby.db";
     private static final int DATABASE_VERSION = 1;
 
     public DatabaseHelper(Context context) {
@@ -14,32 +17,39 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        // Vytvoření tabulky uživatelů
-        String createUsers = "CREATE TABLE users (" +
-                "id INTEGER PRIMARY KEY AUTOINCREMENT," +
-                "email TEXT," +
-                "club TEXT," +
-                "height INTEGER," +
-                "weight INTEGER," +
-                "position TEXT," +
-                "trainingFrequency TEXT," +
-                "goal TEXT)";
-        db.execSQL(createUsers);
-
-        // Vytvoření tabulky statistik
-        String createStats = "CREATE TABLE stats (" +
-                "id INTEGER PRIMARY KEY AUTOINCREMENT," +
-                "user_email TEXT," +
-                "weight INTEGER," +
-                "distance REAL," +
-                "calories INTEGER)";
-        db.execSQL(createStats);
+        String createUsersTable = "CREATE TABLE users (id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                "email TEXT UNIQUE, password TEXT)";
+        db.execSQL(createUsersTable);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS users");
-        db.execSQL("DROP TABLE IF EXISTS stats");
         onCreate(db);
     }
+
+    // ✅ Opravená metoda `registerUser()`
+    public boolean registerUser(String email, String password) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("email", email);
+        values.put("password", password);
+
+        long result = db.insert("users", null, values);
+        return result != -1; // Pokud je výsledek -1, registrace selhala
+    }
+
+    // ✅ Opravená metoda `checkUser()`
+    public boolean checkUser(String email, String password) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM users WHERE email=? AND password=?",
+                new String[]{email, password});
+        boolean exists = cursor.getCount() > 0;
+        cursor.close();
+        return exists;
+    }
 }
+
+
+
+

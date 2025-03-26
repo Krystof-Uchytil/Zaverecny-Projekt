@@ -10,38 +10,28 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
 public class StatisticsActivity extends AppCompatActivity {
-
-    private TextView tvStats;
-    private EditText etUpdateWeight, etDistance, etCalories;
-    private Button btnUpdateStats;
-    private DatabaseHelper dbHelper;
-    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_statistics);
 
-        mAuth = FirebaseAuth.getInstance();
-        dbHelper = new DatabaseHelper(this);
+        DatabaseHelper dbHelper = new DatabaseHelper(this);
+        TextView tvStats = findViewById(R.id.tv_stats);
+        EditText etWeight = findViewById(R.id.et_weight);
+        EditText etDistance = findViewById(R.id.et_distance);
+        EditText etCalories = findViewById(R.id.et_calories);
+        Button btnSaveStats = findViewById(R.id.btn_save_stats);
 
-        tvStats = findViewById(R.id.tv_stats);
-        etUpdateWeight = findViewById(R.id.et_update_weight);
-        etDistance = findViewById(R.id.et_distance);
-        etCalories = findViewById(R.id.et_calories);
-        btnUpdateStats = findViewById(R.id.btn_update_stats);
+        btnSaveStats.setOnClickListener(v -> saveStats(dbHelper, etWeight, etDistance, etCalories, tvStats));
 
-        btnUpdateStats.setOnClickListener(v -> updateStats());
-
-        loadStats();
+        loadStats(dbHelper, tvStats);
     }
 
-    private void updateStats() {
-        String weightStr = etUpdateWeight.getText().toString().trim();
+    private void saveStats(DatabaseHelper dbHelper, EditText etWeight, EditText etDistance, EditText etCalories, TextView tvStats) {
+        String weightStr = etWeight.getText().toString().trim();
         String distanceStr = etDistance.getText().toString().trim();
         String caloriesStr = etCalories.getText().toString().trim();
 
@@ -50,47 +40,46 @@ public class StatisticsActivity extends AppCompatActivity {
             return;
         }
 
-        FirebaseUser user = mAuth.getCurrentUser();
-        if (user == null) {
-            Toast.makeText(StatisticsActivity.this, "Uživatel není přihlášen", Toast.LENGTH_SHORT).show();
-            return;
-        }
+        int weight = Integer.parseInt(weightStr);
+        float distance = Float.parseFloat(distanceStr);
+        int calories = Integer.parseInt(caloriesStr);
 
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put("weight", Integer.parseInt(weightStr));
-        values.put("distance", Float.parseFloat(distanceStr));
-        values.put("calories", Integer.parseInt(caloriesStr));
-        values.put("user_email", user.getEmail());
+        values.put("weight", weight);
+        values.put("distance", distance);
+        values.put("calories", calories);
 
         long id = db.insert("stats", null, values);
         if (id != -1) {
-            Toast.makeText(StatisticsActivity.this, "Statistiky aktualizovány", Toast.LENGTH_SHORT).show();
-            loadStats();
+            Toast.makeText(StatisticsActivity.this, "Statistiky uloženy", Toast.LENGTH_SHORT).show();
+            loadStats(dbHelper, tvStats);
         } else {
-            Toast.makeText(StatisticsActivity.this, "Chyba při aktualizaci", Toast.LENGTH_SHORT).show();
+            Toast.makeText(StatisticsActivity.this, "Chyba při ukládání", Toast.LENGTH_SHORT).show();
         }
     }
 
-    private void loadStats() {
-        FirebaseUser user = mAuth.getCurrentUser();
-        if (user == null) return;
-
+    private void loadStats(DatabaseHelper dbHelper, TextView tvStats) {
         SQLiteDatabase db = dbHelper.getReadableDatabase();
-        Cursor cursor = db.query("stats", null, "user_email = ?", new String[]{user.getEmail()}, null, null, null);
+        Cursor cursor = db.query("stats", null, null, null, null, null, "id DESC");
 
-        StringBuilder sb = new StringBuilder();
+        StringBuilder statsText = new StringBuilder("📊 Poslední statistiky:\n");
+
         while (cursor.moveToNext()) {
-            int weight = cursor.getInt(cursor.getColumnIndex("weight"));
-            float distance = cursor.getFloat(cursor.getColumnIndex("distance"));
-            int calories = cursor.getInt(cursor.getColumnIndex("calories"));
-            sb.append("Váha: ").append(weight).append(" kg\n")
-                    .append("Uběhnuté kilometry: ").append(distance).append(" km\n")
-                    .append("Spálené kalorie: ").append(calories).append(" kcal\n")
+            int weight = cursor.getInt(cursor.getColumnIndexOrThrow("weight"));
+            float distance = cursor.getFloat(cursor.getColumnIndexOrThrow("distance"));
+            int calories = cursor.getInt(cursor.getColumnIndexOrThrow("calories"));
+
+            statsText.append("Váha: ").append(weight).append(" kg\n")
+                    .append("Uběhnuto: ").append(distance).append(" km\n")
+                    .append("Kalorie: ").append(calories).append(" kcal\n")
                     .append("---------------------\n");
         }
         cursor.close();
-        tvStats.setText(sb.toString());
+        tvStats.setText(statsText.toString());
     }
 }
+
+
+
 
