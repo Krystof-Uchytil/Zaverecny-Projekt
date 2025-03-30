@@ -1,84 +1,74 @@
 package com.example.projekt_rugbytrainings;
 
-import android.content.ContentValues;
+import android.annotation.SuppressLint;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class StatisticsActivity extends AppCompatActivity {
+    private TextView tvDistance, tvWeightGained, tvTrainingSessions;
+    private Button btnUpdateStats;
+    private DatabaseHelper dbHelper;
+    private String userEmail = "test@example.com"; // Přizpůsob si to podle přihlášeného uživatele
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_statistics);
 
-        DatabaseHelper dbHelper = new DatabaseHelper(this);
-        TextView tvStats = findViewById(R.id.tv_stats);
-        EditText etWeight = findViewById(R.id.et_weight);
-        EditText etDistance = findViewById(R.id.et_distance);
-        EditText etCalories = findViewById(R.id.et_calories);
-        Button btnSaveStats = findViewById(R.id.btn_save_stats);
+        tvDistance = findViewById(R.id.tv_distance);
+        tvWeightGained = findViewById(R.id.tv_weight_gain);
+        tvTrainingSessions = findViewById(R.id.tv_trainings_count);
+        btnUpdateStats = findViewById(R.id.btn_update_stats);
 
-        btnSaveStats.setOnClickListener(v -> saveStats(dbHelper, etWeight, etDistance, etCalories, tvStats));
+        dbHelper = new DatabaseHelper(this);
+        loadStatistics();
 
-        loadStats(dbHelper, tvStats);
+        // Přidání listeneru na tlačítko pro aktualizaci statistik
+        btnUpdateStats.setOnClickListener(v -> updateStats());
     }
 
-    private void saveStats(DatabaseHelper dbHelper, EditText etWeight, EditText etDistance, EditText etCalories, TextView tvStats) {
-        String weightStr = etWeight.getText().toString().trim();
-        String distanceStr = etDistance.getText().toString().trim();
-        String caloriesStr = etCalories.getText().toString().trim();
+    @SuppressLint("SetTextI18n")
+    private void loadStatistics() {
+        Cursor cursor = dbHelper.getStatistics(userEmail);
+        if (cursor.moveToFirst()) {
+            double distance = cursor.getDouble(cursor.getColumnIndexOrThrow("distance"));
+            double weightGained = cursor.getDouble(cursor.getColumnIndexOrThrow("weight_gained"));
+            int trainingSessions = cursor.getInt(cursor.getColumnIndexOrThrow("training_sessions"));
 
-        if (TextUtils.isEmpty(weightStr) || TextUtils.isEmpty(distanceStr) || TextUtils.isEmpty(caloriesStr)) {
-            Toast.makeText(StatisticsActivity.this, "Vyplňte všechny údaje", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        int weight = Integer.parseInt(weightStr);
-        float distance = Float.parseFloat(distanceStr);
-        int calories = Integer.parseInt(caloriesStr);
-
-        SQLiteDatabase db = dbHelper.getWritableDatabase();
-        ContentValues values = new ContentValues();
-        values.put("weight", weight);
-        values.put("distance", distance);
-        values.put("calories", calories);
-
-        long id = db.insert("stats", null, values);
-        if (id != -1) {
-            Toast.makeText(StatisticsActivity.this, "Statistiky uloženy", Toast.LENGTH_SHORT).show();
-            loadStats(dbHelper, tvStats);
+            tvDistance.setText("Uběhnutá vzdálenost: " + distance + " km");
+            tvWeightGained.setText("Nabrana váha: " + weightGained + " kg");
+            tvTrainingSessions.setText("Počet tréninků: " + trainingSessions);
         } else {
-            Toast.makeText(StatisticsActivity.this, "Chyba při ukládání", Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    private void loadStats(DatabaseHelper dbHelper, TextView tvStats) {
-        SQLiteDatabase db = dbHelper.getReadableDatabase();
-        Cursor cursor = db.query("stats", null, null, null, null, null, "id DESC");
-
-        StringBuilder statsText = new StringBuilder("📊 Poslední statistiky:\n");
-
-        while (cursor.moveToNext()) {
-            int weight = cursor.getInt(cursor.getColumnIndexOrThrow("weight"));
-            float distance = cursor.getFloat(cursor.getColumnIndexOrThrow("distance"));
-            int calories = cursor.getInt(cursor.getColumnIndexOrThrow("calories"));
-
-            statsText.append("Váha: ").append(weight).append(" kg\n")
-                    .append("Uběhnuto: ").append(distance).append(" km\n")
-                    .append("Kalorie: ").append(calories).append(" kcal\n")
-                    .append("---------------------\n");
+            Toast.makeText(this, "Žádné statistiky nejsou k dispozici.", Toast.LENGTH_SHORT).show();
         }
         cursor.close();
-        tvStats.setText(statsText.toString());
+    }
+
+    private void updateStats() {
+        // Simulovaná nová data (můžeš to nahradit daty ze vstupů)
+        double newDistance = 10.5;  // Například nový běh
+        double newWeightGained = 1.2; // Přibraná váha
+        int newSessions = 5; // Počet tréninků
+
+        boolean success = dbHelper.updateStatistics(userEmail, newDistance, newWeightGained, newSessions);
+        if (success) {
+            Toast.makeText(this, "Statistiky aktualizovány!", Toast.LENGTH_SHORT).show();
+            loadStatistics(); // Znovu načteme data
+        } else {
+            Toast.makeText(this, "Chyba při aktualizaci statistik.", Toast.LENGTH_SHORT).show();
+        }
     }
 }
+
+
+
+
+
+
 
 
 
